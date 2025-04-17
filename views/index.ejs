@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Transaction History</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f2f6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2d3436;
+      margin-bottom: 30px;
+    }
+
+    .post {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 15px auto;
+      max-width: 600px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.2s ease;
+    }
+
+    .post:hover {
+      transform: scale(1.01);
+    }
+
+    .details {
+      flex: 1;
+    }
+
+    .Desc {
+      margin: 0;
+      color: #0984e3;
+      font-size: 18px;
+    }
+
+    .amount {
+      margin: 5px 0;
+      font-size: 20px;
+      font-weight: bold;
+      color: #2d3436;
+    }
+
+    .date {
+      margin: 0;
+      font-size: 14px;
+      color: #636e72;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-left: 20px;
+    }
+
+    .actions a, .actions button {
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .actions a {
+      background-color: #74b9ff;
+      color: white;
+      text-align: center;
+    }
+
+    .actions button {
+      background-color: #d63031;
+      color: white;
+    }
+
+    .actions a:hover {
+      background-color: #0984e3;
+    }
+
+    .actions button:hover {
+      background-color: #c0392b;
+    }
+
+    .add-btn {
+      display: block;
+      margin: 30px auto;
+      text-align: center;
+      background-color: #00b894;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      width: fit-content;
+    }
+
+    .add-btn:hover {
+      background-color: #019875;
+    }
+  </style>
+</head>
+<body>
+  <h1>Transaction History</h1>
+
+  <% for(let post of posts){ 
+      let icon = "";
+      if (post.Description === "Groceries") icon = "🛒";
+      else if (post.Description === "Fuel") icon = "⛽";
+      else if (post.Description === "Rent") icon = "🏠";
+      else if (post.Description === "Medical") icon = "💊";
+      else if (post.Description === "Utilities") icon = "💡";
+      else icon = "📦"; // default or Other
+  %>
+
+  <div class="post">
+    <div class="details">
+      <h3 class="Desc"><%= icon %> Paid to <%= post.Description %></h3>
+      <h3 class="amount">₹<%= post.amount %></h3>
+      <h4 class="date">Date: <%= post.date %></h4>
+    </div>
+    <div class="actions">
+      <a href="/posts/<%= post.id %>/edit">Edit</a>
+      <form method="POST" action="/posts/<%= post.id %>?_method=DELETE">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  </div>
+  <% } %>
+
+  <a class="add-btn" href="/posts/new">+ Pay Next</a>
+  <a href="/dashboard">Go to Dashboard</a>
+</body>
+</html>

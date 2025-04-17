@@ -1,0 +1,17 @@
+<form method="POST" action="/posts">
+    <label>Category</label>
+    <select name="Description" required>
+      <option value="">-- Select Category --</option>
+      <option value="Groceries">Groceries</option>
+      <option value="Fuel">Fuel</option>
+      <option value="Rent">Rent</option>
+      <option value="Medical">Medical</option>
+      <option value="Utilities">Utilities</option>
+      <option value="Other">Other</option>
+    </select><br><br>
+  
+    <input type="number" name="amount" placeholder="Amount in ₹" required min="1" />
+    <input type="text" name="date" placeholder="Date (e.g. 25th Feb 2025)" required />
+  
+    <button type="submit">Add Transaction</button>
+  </form>
